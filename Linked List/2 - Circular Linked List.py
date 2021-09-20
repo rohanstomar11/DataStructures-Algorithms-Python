@@ -57,6 +57,76 @@ class circularLinkedList:
             node.next = head
             self.head = node
 
+    def addNodeAtIndex(self, data, index):
+        head = self.head
+        tail = self.tail
+        node = Node(data)
+        for i in range(index-1):
+            head = head.next
+        next = head.next
+        node.prev = head
+        node.next = next
+        next.prev = node
+        head.next = node
+
+    def deleteNodeAtEnd(self):
+        head = self.head
+        tail = self.tail
+        if(head == None):
+            print("Unable to delete, Linked List Empty!")
+        else:
+            if(head == tail):
+                self.head = None
+                self.tail = None
+            else:
+                prev = tail.prev
+                prev.next = None
+                tail = None
+                self.tail = prev
+
+    def deleteNodeAtFront(self):
+        head = self.head
+        tail = self.tail
+        if(head == None):
+            print("Unable to delete, Linked List Empty!")
+        else:
+            if(head == tail):
+                self.head = None
+                self.tail = None
+            else:
+                next = head.next
+                head = None
+                next.prev = None
+                self.head = next
+
+    def deleteNodeAtIndex(self, index):
+        head = self.head
+        tail = self.tail
+        if(head == None):
+            print("Unable to delete, Linked List Empty!")
+        else:
+            for n in range(index-1):
+                head = head.next
+            next = head.next
+            head.next = next.next
+            (next.next).prev = head
+            next = None
+
+    def deleteNodeByValue(self, data):
+        head = self.head
+        tail = self.tail
+        if(head == None):
+            print("Unable to delete, Linked List Empty!")
+        else:
+            if(head.data == data):
+                self.head = None
+            else:
+                while(head.data != data):
+                    head = head.next
+                prev = head.prev
+                prev.next = head.next
+                (head.next).prev = prev
+
 
 circ = circularLinkedList()
 print("--->")
@@ -65,11 +135,36 @@ circ.addNodeAtEnd(5)
 print("--->")
 circ.displayFront()
 circ.addNodeAtEnd(6)
-print("--->")
+print("<---")
 circ.displayBack()
 circ.addNodeAtFront(4)
 print("--->")
 circ.displayFront()
+circ.addNodeAtIndex(0, 2)
+print("--->")
+circ.displayFront()
 circ.addNodeAtFront(3)
 print("--->")
+circ.displayFront()
+circ.deleteNodeAtIndex(2)
+print("--->")
+print("--->")
+circ.displayFront()
+circ.deleteNodeByValue(0)
+print("--->")
+circ.displayFront()
+print("<---")
+circ.displayBack()
+circ.deleteNodeAtIndex(1)
+print("--->")
+circ.displayFront()
+circ.deleteNodeAtEnd()
+print("--->")
+circ.displayFront()
+print("<---")
+circ.displayBack()
+circ.deleteNodeAtEnd()
+print("--->")
+circ.displayFront()
+print("<---")
 circ.displayBack()
