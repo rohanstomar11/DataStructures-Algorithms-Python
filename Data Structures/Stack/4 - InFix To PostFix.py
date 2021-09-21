@@ -95,14 +95,16 @@ def infixToPostfix(exp):
         if not isOperator(s):
             new = new + s
         else:
-            if(checkPrecedence(s) >= checkPrecedence(stack.stackTop())):
+            if(checkPrecedence(s) > checkPrecedence(stack.stackTop())):
                 stack.push(s)
             else:
-                new = new + str(stack.pop())
+                while(not(checkPrecedence(s) > checkPrecedence(stack.stackTop()))):
+                    new = new + str(stack.pop())
+                stack.push(s)
     while(not(stack.isEmpty())):
         new = new + str(stack.pop())
     return new
 
 
-infix = "a+b+d-c"
+infix = "a+b*d-c/a+b"
 print("Postfix is : ", infixToPostfix(infix))
