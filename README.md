@@ -1,3 +1,3 @@
 # DataStructures-Algorithms-Python
 
-Feel Free to Simplify the codes, But not oversimplify.
+Feel Free to Simplify the Codes, But do not Oversimplify.
