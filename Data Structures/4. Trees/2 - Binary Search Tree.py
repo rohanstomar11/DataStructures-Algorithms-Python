@@ -34,15 +34,30 @@ class BST:
             self.inOrderTraversal(node.right)
 
     def isBST(self, root):
-        # Code to check whether the tree is BST or not.
-        pass
+        if root is None:
+            return 1
+        if (root.left is not None and root.left.data > root.data):
+            return 0
+        if(root.right is not None and root.right.data < root.data):
+            return 0
+        if(not(self.isBST(root.left)) or not(self.isBST(root.right))):
+            return 0
+        return 1
 
     def checkData(self, root, data):
-        # Code to check if a number(data) is present in BST or not.
-        pass
+        if root is None:
+            return False
+        if root.data == data:
+            return True
+        left = self.checkData(root.left, data)
+        if left:
+            return True
+        right = self.checkData(root.right, data)
+        return right
 
 
 bst = BST()
+
 root = bst.insertNode(bst.getRoot(), 11)
 root = bst.insertNode(bst.getRoot(), 5)
 root = bst.insertNode(bst.getRoot(), 33)
@@ -50,4 +65,18 @@ root = bst.insertNode(bst.getRoot(), 1)
 root = bst.insertNode(bst.getRoot(), 7)
 root = bst.insertNode(bst.getRoot(), 22)
 root = bst.insertNode(bst.getRoot(), 44)
+
 bst.inOrderTraversal(bst.getRoot())
+print("---")
+
+if(bst.isBST(bst.getRoot())):
+    print("It is a Binary Search Tree!")
+else:
+    print("It is not a Binary Search Tree!")
+print("---")
+
+key = 11
+if(bst.checkData(bst.getRoot(), key)):
+    print(key, "exists in BST!")
+else:
+    print(key, "doesn't exists in BST!")
